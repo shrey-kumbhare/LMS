@@ -1,0 +1,58 @@
+{% extends "layout.html" %} {% block title %} Home {% endblock %} {% block main
+%}
+<br />
+<div class="cards">
+  <div class="home">
+    <ol class="card-list">
+      <li class="card-item">
+        <!-- Books -->
+        <div class="card" style="width: 18rem">
+          <div class="card-body">
+            <h5 class="card-title">Books</h5>
+            <p class="card-text">There library has {{total_books}} books</p>
+            <a
+              href="{{url_for('book.search_books')}}"
+              class="btn btn-primary"
+              style="background-color: black"
+              >Manage Books</a
+            >
+          </div>
+        </div>
+      </li>
+      <li class="card-item">
+        <!-- Members -->
+        <div class="card" style="width: 18rem">
+          <div class="card-body">
+            <h5 class="card-title">Members</h5>
+            <p class="card-text">There are {{total_members}} in the library</p>
+            <a
+              href="{{url_for('member.search_members')}}"
+              class="btn btn-primary"
+              style="background-color: black"
+              >Manage Members</a
+            >
+          </div>
+        </div>
+      </li>
+      <li class="card-item">
+        <!-- Transactions -->
+        <div class="card" style="width: 18rem">
+          <div class="card-body">
+            <h5 class="card-title">Transactions</h5>
+            <p class="card-text">
+              {{total_transactions}} total transactions. {{ ongoing_issues}}
+              issue(s).
+            </p>
+            <a
+              href="{{ url_for('view_transactions') }}"
+              class="btn btn-primary"
+              style="background-color: black"
+              >View Transactions</a
+            >
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</div>
+{% endblock %}

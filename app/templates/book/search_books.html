@@ -1,0 +1,85 @@
+{% extends "layout.html" %} {% block title %} Book Database {% endblock %} {%
+block main %}
+
+<br />
+
+<h3 style="text-align: center">Search Books</h3>
+<!-- Import books button -->
+<button
+  style="background-color:burlywood; color: black;"
+  type="button"
+  class="btn btn-success"
+  id="import-books"
+  onclick="location.href='{{ url_for('book.import_books') }}'"
+>
+  Import Books
+</button>
+
+<!-- View all books button -->
+<button
+  style="background-color: burlywood; color: black;"
+  type="button"
+  class="btn btn-success"
+  id="all_books"
+  onclick="location.href='{{ url_for('book.all_books')}}'"
+>
+  All Books
+</button>
+
+<form method="POST" action="/search-books">
+  {{ form.hidden_tag() }}
+
+  <br />
+
+  <!-- Search Input -->
+  <div class="mb-3">
+    {{ form.search(class="form-control", placeholder="Search by title or
+    author", autocomplete="off") }}
+  </div>
+
+  <!-- Submit Button -->
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<!-- Display Book Table -->
+{% if book_list %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">Total Copies</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book in book_list %}
+    <tr>
+      <td>{{ book.id }}</td>
+      <td>{{ book.title }}</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.isbn }}</td>
+      <td>{{ book.Quantity }}</td>
+      <td>
+        <!-- Add an Update button for each book -->
+        <a
+          style="background-color: black;"
+          href="{{ url_for('book.update_book',  book_id=book.id) }}"
+          class="btn btn-primary"
+          >Update</a
+        >
+      </td>
+      <td>
+        <form
+          method="POST"
+          action="{{ url_for('book.delete_book', title=book.title, author=book.author, isbn=book.isbn, publisher=book.publisher) }}"
+        >
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %} {% endblock %}

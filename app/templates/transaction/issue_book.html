@@ -1,0 +1,30 @@
+{% extends "layout.html" %} {% block title %}Issue Book{% endblock %} {% block
+main %}
+<br />
+<div class="container-fluid">
+  <div class="row">
+    <!-- Page Content -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="form-container">
+        <h3 style="text-align: center">Issue Book</h3>
+        <form method="POST" action="/issue-book">
+          {{ form.hidden_tag() }}
+          <div class="mb-3">
+            <label for="{{ form.member.id }}">{{ form.member.label }}</label>
+            {{ form.member(class="form-select form-control-lg",
+            id=form.member.id) }}
+          </div>
+          <div class="mb-3">
+            <label for="{{ form.book.id }}">{{ form.book.label }}</label>
+            {{ form.book(class="form-select form-control-lg", id=form.book.id)
+            }}
+          </div>
+          <button type="submit" class="btn btn-primary">
+            {{ form.submit.label }}
+          </button>
+        </form>
+      </div>
+    </main>
+  </div>
+</div>
+{% endblock %}

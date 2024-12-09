@@ -1,0 +1,29 @@
+{% extends "layout.html" %} {% block title %} Add Member{% endblock %} {% block
+main %}
+<br />
+<h3 style="text-align: center">Add Member</h3>
+<form method="POST" action="/add-members">
+  {{ form.hidden_tag() }}
+
+  <!-- Username -->
+  <div class="mb-3">
+    {{ form.username.label }} {{ form.username(class="form-control",
+    placeholder="Enter username") }}
+  </div>
+
+  <!-- Fullname -->
+  <div class="mb-3">
+    {{ form.fullname.label }} {{ form.fullname(class="form-control",
+    placeholder="Enter fullname") }}
+  </div>
+
+  <!-- Email -->
+  <div class="mb-3">
+    {{ form.email.label }} {{ form.email(class="form-control",
+    placeholder="Enter email") }}
+  </div>
+
+  <!-- Submit Button -->
+  <button type="submit" class="btn btn-primary">Add Member</button>
+</form>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "layout.html" %} {% block title %} Delete Books From Library {% endblock
+%} {% block main %}
+<h3>Delete Books from Library</h3><form method="POST" action="/delete-book?title
+={{ book.title }}&author={{ book.author }}&isbn={{ book.isbn }}&publisher={{ book.publisher }}">
+  {{ form.hidden_tag() }}
+
+  <!-- Title -->
+  <div class="mb-3">
+    {{ form.title.label }} {{ form.title(class="form-control",
+    placeholder="Enter book title") }}
+  </div>
+
+  <!-- Author -->
+  <div class="mb-3">
+    {{ form.author.label }} {{ form.author(class="form-control",
+    placeholder="Enter author") }}
+  </div>
+
+  <!-- ISBN -->
+  <div class="mb-3">
+    {{ form.isbn.label }} {{ form.isbn(class="form-control", placeholder="Enter
+    ISBN") }}
+  </div>
+
+  <!-- Publisher -->
+  <div class="mb-3">
+    {{ form.publisher.label }} {{ form.publisher(class="form-control",
+    placeholder="Enter publisher") }}
+  </div>
+
+  <!-- Quantity -->
+  <div class="mb-3">
+    {{ form.quantity.label }} {{ form.quantity(class="form-control",
+    placeholder="Enter quantity to delete (1-50)") }}
+  </div>
+
+  <!-- Submit Button -->
+  <button type="submit" class="btn btn-primary">Delete</button>
+</form>
+{% endblock %}

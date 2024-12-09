@@ -1,0 +1,63 @@
+{% extends "layout.html" %} {% block title %} import Books {% endblock %} {%
+block main %}
+
+<br />
+
+<h3 style="text-align: center">Import Books</h3>
+<form method="POST" action="/import-books">
+  {{ form.hidden_tag() }}
+
+  <!-- Search Bar -->
+  <div class="mb-3">
+    {{ form.search(class="form-control", placeholder="Search by title or
+    author", autocomplete="off") }}
+  </div>
+
+  <!-- Search Button -->
+  <button type="submit" style="background-color: black; " class="btn btn-primary">Search</button>
+</form>
+
+<br />
+
+{% if search_results %}
+ <div style="text-align: center;">
+    <button type="Text" style="background-color: burlywood; color: black;" class="btn btn-primary">Available Copies</button>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Book Number</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>ISBN</th>
+      <th>Publisher</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book in search_results %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ book.title }}</td>
+      <td>{{ book.authors }}</td>
+      <td>{{ book.isbn }}</td>
+      <td>{{ book.publisher }}</td>
+      <td>
+        <form method="POST" action="{{ url_for('book.add_book') }}">
+          {{ form.hidden_tag() }}
+          <input type="hidden" name="title" value="{{ book.title }}" />
+          <input type="hidden" name="author" value="{{ book.authors }}" />
+          <input type="hidden" name="isbn" value="{{ book.isbn }}" />
+          <input type="hidden" name="publisher" value="{{ book.publisher }}" />
+          <button type="submit" class="btn btn-success" style="background-color: black;">Add</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<footer class="mb-5 small text-center text-muted">
+      Data provided by <a href="https://frappe.io/">Frappe</a>
+    </footer>
+{% endif %} {% endblock %}

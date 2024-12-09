@@ -1,0 +1,51 @@
+{% extends "layout.html" %} {% block title %} All Books {% endblock %} {% block
+main %}
+<br />
+
+<h3 style="text-align: center">All Books</h3>
+
+<!-- Display All Books Table -->
+{% if library_books %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">Total Copies</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book in library_books %}
+    <tr>
+      <td>{{ book.id }}</td>
+      <td>{{ book.title }}</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.isbn }}</td>
+      <td>{{ book.Quantity }}</td>
+      <td>
+        <!-- Add an Update button for each book -->
+        <a
+          href="{{ url_for('book.update_book', book_id=book.id) }}"
+          class="btn btn-primary"
+          style="background-color: burlywood; color: black"
+          >Update</a
+        >
+      </td>
+
+      <td>
+        <form
+          method="POST"
+          action="{{ url_for('book.delete_book', title=book.title, author=book.author, isbn=book.isbn, publisher=book.publisher) }}"
+        >
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No books available in the library.</p>
+{% endif %} {% endblock %}

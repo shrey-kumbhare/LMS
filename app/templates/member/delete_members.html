@@ -1,0 +1,34 @@
+{% extends "layout.html" %} {% block title %} Delete Members {% endblock %} {%
+block main %}
+<h3>Delete Members</h3>
+<form method="POST" action="/delete-members/{{member_to_delete.id}}">
+  {{ form.hidden_tag() }}
+
+  <!-- username -->
+  <div class="mb-3">
+    {{ form.username.label }} {{ form.username(class="form-control",
+    placeholder="Enter member's username") }}
+  </div>
+
+  <!-- fullname -->
+  <div class="mb-3">
+    {{ form.fullname.label }} {{ form.fullname(class="form-control",
+    placeholder="Enter fullname") }}
+  </div>
+
+  <!-- email -->
+  <div class="mb-3">
+    {{ form.email.label }} {{ form.email(class="form-control",
+    placeholder="Enter email") }}
+  </div>
+
+  <!-- rent owed -->
+  <div class="mb-3">
+    {{ form.outstanding_debt.label }} {{ form.outstanding_debt(class="form-control",
+    placeholder="Enter rent owed") }}
+  </div>
+
+  <!-- Submit Button -->
+  <button type="submit" class="btn btn-primary">Delete</button>
+</form>
+{% endblock %}

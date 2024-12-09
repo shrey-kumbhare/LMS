@@ -1,0 +1,71 @@
+{% extends "layout.html" %} {% block title %} Transactions {% endblock %} {%
+block main %}
+
+<br />
+<div style="text-align: center">
+  <button
+    type="Text"
+    style="background-color: burlywood; color: black"
+    class="btn btn-primary"
+  >
+    Transactions
+  </button>
+</div>
+
+<!-- Issue Book button -->
+<button
+  style="background-color: black; color: white"
+  type="button"
+  class="btn btn-success"
+  id="Issue Book"
+  onclick="location.href='{{ url_for('transactions.issue_book')}}'"
+>
+  Issue Book
+</button>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Transaction ID</th>
+      <th>Book ID</th>
+      <th>Member ID</th>
+      <th>Borrowed Date</th>
+      <th>Return Date</th>
+      <th>Total Fee</th>
+      <th>Amount Paid</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for transaction in transactions %}
+    <tr>
+      <td>{{ transaction.transaction_id }}</td>
+      <td>{{ transaction.book_id }}</td>
+      <td>{{ transaction.member_id }}</td>
+      <td>{{ transaction.borrowed_date }}</td>
+      <td>
+        {{ transaction.return_date if transaction.return_date is not none else
+        '-' }}
+      </td>
+      <td>
+        {{ transaction.total_fee if transaction.total_fee is not none else '-'
+        }}
+      </td>
+      <td>
+        {{transaction. amount_paid if transaction. amount_paid is not none else
+        '-' }}
+      </td>
+      <td>
+        {% if transaction.return_date is none %}
+        <a
+          style="background-color: blue; color: white"
+          href="{{ url_for('transactions.return_book', transaction_id=transaction.transaction_id) }}"
+          class="btn btn-primary"
+          >Return Book</a
+        >
+        {% else %} Returned {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

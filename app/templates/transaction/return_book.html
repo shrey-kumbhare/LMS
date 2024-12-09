@@ -1,0 +1,31 @@
+{% extends "layout.html" %} {% block title %} Return Book {% endblock %} {%
+block main %}
+<h3 class="mt-4" style="text-align: center">Return Book</h3>
+
+<form method="POST" action="/return-book/{{ transaction_id }}">
+  {{ form.hidden_tag() }}
+  <div class="form-group">
+    <label for="transaction_id">Transaction ID:</label>
+    {{ form.transaction_id(class="form-control", placeholder="Enter Transaction
+    ID") }}
+  </div>
+
+  <div class="form-group">
+    <label for="days_rented">Days Rented:</label>
+    {{ form.days_rented(class="form-control", placeholder="Enter Days rented")
+    }}
+  </div>
+
+  <div class="form-group">
+    <label for="total_fee">Total fee:</label>
+    {{ form.total_fee(class="form-control", placeholder="Enter Total Fee") }}
+  </div>
+
+  <div class="form-group">
+    <label for="Amount_paid">Amount Paid</label>
+    {{ form.Amount_paid(class="form-control", placeholder="Enter Amount Paid")
+    }}
+  </div>
+  <button type="submit" class="btn btn-primary">Return Book</button>
+</form>
+{% endblock %}

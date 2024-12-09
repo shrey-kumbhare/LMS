@@ -1,0 +1,83 @@
+{% extends "layout.html" %} {% block title %} Members {% endblock %} {% block
+main %}
+
+<br />
+
+<h3 style="text-align: center; margin-top">Search Members</h3>
+
+<!-- View all members button -->
+<button
+  style="background-color: burlywood; color: black"
+  type="button"
+  class="btn btn-success"
+  id="all_members"
+  onclick="location.href='{{ url_for('member.all_members')}}'"
+>
+  All Members
+</button>
+
+<!-- Add members button -->
+<button
+  style="background-color: burlywood; color: black"
+  type="button"
+  class="btn btn-success"
+  id="add_members"
+  onclick="location.href='{{ url_for('member.add_member')}}'"
+>
+  Add New Member
+</button>
+
+<form method="POST" action="/search-members">
+  {{ form.hidden_tag() }}
+  <!-- Search Input -->
+  <div class="mb-3">
+    {{ form.search.label }} {{ form.search(class="form-control",
+    placeholder="Search by name or id",autocomplete="off") }}
+  </div>
+
+  <!-- Submit Button -->
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<!-- Display Members Table -->
+{% if members_list %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Username</th>
+      <th scope="col">Fullname</th>
+      <th scope="col">email</th>
+      <th scope="col">Rent Owed</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for member in members_list %}
+    <tr>
+      <td>{{ member.id }}</td>
+      <td>{{ member.username }}</td>
+      <td>{{ member.fullname }}</td>
+      <td>{{ member.email }}</td>
+      <td>{{ member.outstanding_debt }}</td>
+      <td>
+        <!-- An update button for each member -->
+        <a
+          style="background-color: burlywood; color: black"
+          href="{{url_for('member.update_members', id=member.id)}}"
+          class="btn btn-primary"
+          >Update</a
+        >
+      </td>
+      <td>
+        <!-- A delete button for each member -->
+        <a
+          href="{{url_for('member.delete_members', id=member.id)}}"
+          class="btn btn-danger"
+          >Delete</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %} {% endblock %}

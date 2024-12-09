@@ -1,0 +1,9 @@
+# Compiled Python Files
+__pycache__
+
+# Flask stuff
+instance
+
+# Environments
+venv
+.env

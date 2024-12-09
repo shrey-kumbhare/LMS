@@ -1,0 +1,43 @@
+{% extends "layout.html" %} {% block title %} Add Books to Library {% endblock
+%} {% block main %}
+<br />
+
+<h3 style="text-align: center">Add Books</h3>
+
+<form method="POST" action="/add-book">
+  {{ form.hidden_tag() }}
+
+  <!-- Title -->
+  <div class="mb-3">
+    <strong>{{ form.title.label }}</strong> {{ form.title(class="form-control",
+    placeholder="Enter book title") }}
+  </div>
+
+  <!-- Author -->
+  <div class="mb-3">
+    <strong>{{ form.author.label }}</strong> {{ form.author(class="form-control",
+    placeholder="Enter author") }}
+  </div>
+
+  <!-- ISBN -->
+  <div class="mb-3">
+    <strong>{{ form.isbn.label }}</strong> {{ form.isbn(class="form-control", placeholder="Enter
+    ISBN") }}
+  </div>
+
+  <!-- Publisher -->
+  <div class="mb-3">
+    <strong>{{ form.publisher.label }}</strong> {{ form.publisher(class="form-control",
+    placeholder="Enter publisher") }}
+  </div>
+
+  <!-- Quantity -->
+  <div class="mb-3">
+    <strong>{{ form.quantity.label }}</strong> {{ form.quantity(class="form-control",
+    placeholder="Enter quantity (1-30)") }}
+  </div>
+
+  <!-- Submit Button -->
+  <button type="submit" class="btn btn-primary">Add to Library</button>
+</form>
+{% endblock %}

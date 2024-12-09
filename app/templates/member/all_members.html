@@ -1,0 +1,60 @@
+{% extends "layout.html" %} {% block title %} Members {% endblock %} {% block
+main %}
+
+<br />
+
+<h3 style="text-align: center; margin-top">All Members</h3>
+
+<!-- Add members button -->
+<button
+  style="background-color: black; color: white"
+  type="button"
+  class="btn btn-success"
+  id="add_members"
+  onclick="location.href='{{ url_for('member.add_member')}}'"
+>
+  Add New Member
+</button>
+
+<!-- Display Members Table -->
+{% if all_members %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Username</th>
+      <th scope="col">Fullname</th>
+      <th scope="col">email</th>
+      <th scope="col">Outstanding Debt</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for member in all_members %}
+    <tr>
+      <td>{{ member.id }}</td>
+      <td>{{ member.username }}</td>
+      <td>{{ member.fullname }}</td>
+      <td>{{ member.email }}</td>
+      <td>{{ member.outstanding_debt }}</td>
+      <td>
+        <!-- An update button for each member -->
+        <a
+          style="background-color: burlywood; color: black"
+          href="{{url_for('member.update_members', id=member.id)}}"
+          class="btn btn-primary"
+          >Update</a
+        >
+      </td>
+      <td>
+        <!-- A delete button for each member -->
+        <a
+          href="{{url_for('member.delete_members', id=member.id)}}"
+          class="btn btn-danger"
+          >Delete</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %} {% endblock %}

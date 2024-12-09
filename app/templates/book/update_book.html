@@ -1,0 +1,31 @@
+{% extends "layout.html" %} 
+{% block title %} Update Books in Library {% endblock %} 
+{% block main %}
+<h3>Update Books in Library</h3>
+<form method="POST" action="/update-book/{{book_to_update.id}}">
+  {{ form.hidden_tag() }}
+
+  <!-- Title -->
+  <div class="mb-3">
+    {{ form.title.label }} {{ form.title(class="form-control", placeholder="Enter book title") }}
+  </div>
+
+  <!-- Author -->
+  <div class="mb-3">
+    {{ form.author.label }} {{ form.author(class="form-control", placeholder="Enter author") }}
+  </div>
+
+  <!-- ISBN -->
+  <div class="mb-3">
+    {{ form.isbn.label }} {{ form.isbn(class="form-control", placeholder="Enter ISBN") }}
+  </div>
+
+  <!-- Publisher -->
+  <div class="mb-3">
+    {{ form.publisher.label }} {{ form.publisher(class="form-control", placeholder="Enter publisher") }}
+  </div>
+
+  <!-- Submit Button -->
+  <button type="submit" class="btn btn-primary">Update</button>
+</form>
+{% endblock %}
